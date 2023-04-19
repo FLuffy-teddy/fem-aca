@@ -1,6 +1,4 @@
-
-
-const inter = Inter({ subsets: ["latin"] });
+import { useState } from 'react';
 
 export default function Home() {
   return <main></main>;
