@@ -8,35 +8,51 @@ export default function Home() {
   function UserBirthday(e: { preventDefault: () => void }) {
     e.preventDefault();
 
-    console.log(day, month, year);
-    console.log(todaysDay, todaysMonth, todaysYear);
-    console.log(subDay, subMonth, subYear);
   }
 
   const [day, setDay] = useState(0);
   const [month, setMonth] = useState(0);
   const [year, setYear] = useState(0);
 
-  var today = new Date();
+  let today = new Date();
   const todaysYear = today.getFullYear();
   const todaysMonth = today.getMonth() + 1;
-  const todaysDay = today.getDay();
+  const todaysDay = today.getDate();
 
-  const subDay = todaysDay - day;
-  const subMonth = todaysMonth - month;
-  const subYear = todaysYear - year;
+  let subDay = todaysDay - day;
+  let subMonth = todaysMonth - month;
+  let subYear = todaysYear - year;
+  let maxDay;
 
-  // take subtracted days and check if negative
-  //   subtract from month and add in correct days depending on month
-  // if negative months subtract year and add in correct months
+  let displayDay = '--';
+  let displayMonth = '--';
+  let displayYear = '--';
 
   //error check users numbers
 
   //style page exactly as design
 
-  if (subDay < 0) {
-    subMonth - 1;
+  if (subDay < 1) {
+    subMonth = subMonth - 1;
+
+    if ([1,3,5,7,8,10,12].includes(subMonth)) {
+      subDay = 31 + subDay;
+      maxDay = 31;
+    }
+    if ([4,6,9,11].includes(subMonth)) {
+      subDay = 30 + subDay;
+      maxDay = 30;
+    }
+    if (subMonth == 2) {
+      subDay = 28 + subDay;
+      maxDay = 28;
+    }
   }
+  if (subMonth < 1) {
+    subYear = subYear - 1;
+    subMonth = 12;
+  }
+  
 
   return (
     <main className="p-4 w-screen h-screen bg-slate-200 flex justify-center items-center">
@@ -49,7 +65,7 @@ export default function Home() {
               name="day"
               placeholder="DD"
               type="number"
-              max={31}
+              max={maxDay}
               onChange={(e) => setDay(e.target.valueAsNumber)}
             ></input>
           </div>
@@ -81,15 +97,15 @@ export default function Home() {
         </form>
         <div className="p-8">
           <div className="flex text-7xl">
-            <h4 className="text-violet-700">--</h4>
+            <h4 className="text-violet-700">{displayYear}</h4>
             <h2 className="text-black font-bold">years</h2>
           </div>
           <div className="flex text-7xl">
-            <h4 className="text-violet-700">--</h4>
+            <h4 className="text-violet-700">{displayMonth}</h4>
             <h2 className="text-black font-bold">months</h2>
           </div>
           <div className="flex text-7xl">
-            <h4 className="text-violet-700">--</h4>
+            <h4 className="text-violet-700">{displayDay}</h4>
             <h2 className="text-black font-bold">days</h2>
           </div>
         </div>
