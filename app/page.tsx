@@ -8,51 +8,55 @@ export default function Home() {
   function UserBirthday(e: { preventDefault: () => void }) {
     e.preventDefault();
 
+    const displayDay:number = subtractedDay;
+    const displayMonth:number = subtractedMonth;
+    const displayYear:number = subtractedYear;
+
+  setDisplayDay(displayDay);
   }
 
   const [day, setDay] = useState(0);
   const [month, setMonth] = useState(0);
   const [year, setYear] = useState(0);
+  const [displayday, setDisplayDay] = useState(0);
+  const [displaymonth, setDisplayMonth] = useState(0);
+  const [displayyear, setDisplayYear] = useState(0);
+
 
   let today = new Date();
   const todaysYear = today.getFullYear();
   const todaysMonth = today.getMonth() + 1;
   const todaysDay = today.getDate();
 
-  let subDay = todaysDay - day;
-  let subMonth = todaysMonth - month;
-  let subYear = todaysYear - year;
+  let subtractedDay = todaysDay - day;
+  let subtractedMonth = todaysMonth - month;
+  let subtractedYear = todaysYear - year;
   let maxDay;
-
-  let displayDay = '--';
-  let displayMonth = '--';
-  let displayYear = '--';
 
   //error check users numbers
 
   //style page exactly as design
 
-  if (subDay < 1) {
-    subMonth = subMonth - 1;
+  if (subtractedDay < 1) {
+    subtractedMonth = subtractedMonth - 1;
 
-    if ([1,3,5,7,8,10,12].includes(subMonth)) {
-      subDay = 31 + subDay;
+    if ([1, 3, 5, 7, 8, 10, 12].includes(subtractedMonth)) {
+      subtractedDay = 31 + subtractedDay;
       maxDay = 31;
     }
-    if ([4,6,9,11].includes(subMonth)) {
-      subDay = 30 + subDay;
+    if ([4, 6, 9, 11].includes(subtractedMonth)) {
+      subtractedDay = 30 + subtractedDay;
       maxDay = 30;
     }
-    if (subMonth == 2) {
-      subDay = 28 + subDay;
+    if (subtractedMonth == 2) {
+      subtractedDay = 28 + subtractedDay;
       maxDay = 28;
     }
   }
-  if (subMonth < 1) {
-    subYear = subYear - 1;
-    subMonth = 12;
+  if (subtractedMonth < 1) {
+    subtractedYear = subtractedYear - 1;
+    subtractedMonth = 12;
   }
-  
 
   return (
     <main className="p-4 w-screen h-screen bg-slate-200 flex justify-center items-center">
@@ -97,15 +101,15 @@ export default function Home() {
         </form>
         <div className="p-8">
           <div className="flex text-7xl">
-            <h4 className="text-violet-700">{displayYear}</h4>
+            <h4 className="text-violet-700">{}</h4>
             <h2 className="text-black font-bold">years</h2>
           </div>
           <div className="flex text-7xl">
-            <h4 className="text-violet-700">{displayMonth}</h4>
+            <h4 className="text-violet-700">{}</h4>
             <h2 className="text-black font-bold">months</h2>
           </div>
           <div className="flex text-7xl">
-            <h4 className="text-violet-700">{displayDay}</h4>
+            <h4 className="text-violet-700">{}</h4>
             <h2 className="text-black font-bold">days</h2>
           </div>
         </div>
