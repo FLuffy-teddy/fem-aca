@@ -6,6 +6,11 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    borderRadius: {
+      mega: "4rem",
+      xl: ".75rem",
+      full: "99999rem",
+    },
     extend: {
       colors: {
         purple: "hsl(259, 100%, 65%)",
